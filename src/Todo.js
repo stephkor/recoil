@@ -1,36 +1,10 @@
 import React, {useEffect} from 'react'
 import axios from 'axios'
-import { atom, useRecoilValue, useSetRecoilState, selector} from 'recoil'
+import {  useRecoilValue, useSetRecoilState,} from 'recoil'
 import TodoItem from './TodoItem'
 import TodoItemCreator from './TodoItemCreator';
 import  TodoFilter from './TodoFilter';
-
-export const todoListState = atom({
-  key: 'todoListState',
-  default: [],
-});
-
-export const todoListFilterState = atom({
-  key: 'todoListFilterState',
-  default: '전체',
-});
-
-export const filteredTodoListState = selector({
-  key: 'filteredTodoListState',
-  get: ({get}) => {
-    const filter = get(todoListFilterState);
-    const list = get(todoListState);
-
-    switch (filter) {
-      case 'complete':
-        return list.filter((item) => item.completed);
-      case 'incomplete':
-        return list.filter((item) => !item.completed);
-      default:
-        return list;
-    }
-  },
-});
+import { filteredTodoListState, todoListState} from "./GlobalState/recoilState";
 
 function Todo () {
   const todoList = useRecoilValue(filteredTodoListState);

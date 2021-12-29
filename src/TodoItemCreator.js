@@ -1,8 +1,13 @@
 
 import React, {useState} from "react";
-import {useSetRecoilState, useRecoilValue} from'recoil'
-import {todoListState}from './Todo'
+import {useSetRecoilState} from'recoil'
+import {todoListState}from './GlobalState/recoilState'
 
+
+let id = 0;
+function getId() {
+  return id++;
+}
 
 function TodoItemCreator() {
   const [inputValue, setInputValue] = useState('');
@@ -14,7 +19,7 @@ function TodoItemCreator() {
       {
         id: getId(),
         title: inputValue,
-        compelted: false,
+        completed: false,
       },
     ]);
     setInputValue('');
@@ -32,10 +37,7 @@ function TodoItemCreator() {
   );
 }
 
-// utility for creating unique Id
-let id = 0;
-function getId() {
-  return id++;
-}
+
+
 
 export default TodoItemCreator

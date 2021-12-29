@@ -1,14 +1,23 @@
 import React from 'react';
 import {useRecoilState} from 'recoil'
-import {todoListState }from './Todo'
+import {todoListState }from './GlobalState/recoilState'
+
+
+function edit(arr, index, newValue) {
+  return [...arr.slice(0, index), newValue, ...arr.slice(index + 1)];
+}
+
+const  deleteItem = (arr, index) =>  {
+  return [...arr.slice(0, index), ...arr.slice(index + 1)];
+}
 
 
 function TodoItem({item}) {
   const [todoList, setTodoList] = useRecoilState(todoListState);
   const index = todoList.findIndex((listItem) => listItem === item);
 
-  const editItemText = ({target: {value}}) => {
-    const newList = replaceItemAtIndex(todoList, index, {
+  const editTitle = ({target: {value}}) => {
+    const newList = edit(todoList, index, {
       ...item,
     title: value,
     });
@@ -16,8 +25,8 @@ function TodoItem({item}) {
     setTodoList(newList);
   };
 
-  const toggleItemCompletion = () => {
-    const newList = replaceItemAtIndex(todoList, index, {
+  const setComplete= () => {
+    const newList = edit(todoList, index, {
       ...item,
       completed: !item.completed,
     });
@@ -25,32 +34,25 @@ function TodoItem({item}) {
     setTodoList(newList);
   };
 
-  const deleteItem = () => {
-    const newList = removeItemAtIndex(todoList, index);
+  const deleteTodoItem = () => {
+    const newList = deleteItem(todoList, index);
 
     setTodoList(newList);
   };
 
   return (
     <div>
-      <input type="text" value={item.title} onChange={editItemText} />
+      <input type="text" value={item.title} onChange={editTitle} />
       <input
         type="checkbox"
         checked={item.completed}
-        onChange={toggleItemCompletion}
+        onChange={setComplete}
       />
-      <button onClick={deleteItem}>X</button>
+      <button onClick={deleteTodoItem}>X</button>
     </div>
   );
 }
 
-function replaceItemAtIndex(arr, index, newValue) {
-  return [...arr.slice(0, index), newValue, ...arr.slice(index + 1)];
-}
-
-function removeItemAtIndex(arr, index) {
-  return [...arr.slice(0, index), ...arr.slice(index + 1)];
-}
 
 
 export default TodoItem
