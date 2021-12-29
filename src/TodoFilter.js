@@ -1,5 +1,5 @@
 import React from 'react';
-import {todoListFilterState } from './GlobalState/recoilState'
+import {todoListFilterState } from './store/todoState'
 import { useRecoilState } from 'recoil';
 
 

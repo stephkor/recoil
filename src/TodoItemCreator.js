@@ -1,7 +1,7 @@
 
 import React, {useState} from "react";
 import {useSetRecoilState} from'recoil'
-import {todoListState}from './GlobalState/recoilState'
+import {todoListState}from './store/todoState'
 
 
 let id = 0;

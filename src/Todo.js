@@ -4,11 +4,15 @@ import {  useRecoilValue, useSetRecoilState,} from 'recoil'
 import TodoItem from './TodoItem'
 import TodoItemCreator from './TodoItemCreator';
 import  TodoFilter from './TodoFilter';
-import { filteredTodoListState, todoListState} from "./GlobalState/recoilState";
+import { filteredTodoListState, todoListState,} from "./store/todoState";
 
 function Todo () {
   const todoList = useRecoilValue(filteredTodoListState);
   const setTodoList = useSetRecoilState(todoListState);
+
+
+  //useRecoilState = 업데이트 가능
+  //useRecoilValue = 읽을때만 씀
 
 
   useEffect(() => {
@@ -19,7 +23,7 @@ function Todo () {
       const res = await axios.get(
         "https://jsonplaceholder.typicode.com/todos"
       )
-      console.log(res)
+
       const {data} = res;
       setTodoList(data)
     } catch (e) {
@@ -42,7 +46,6 @@ function Todo () {
         <TodoItem item={todoItem} key={todoItem.id} />
       ))}
   </div>
-
   )
 }
 

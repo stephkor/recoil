@@ -1,6 +1,6 @@
 import React from 'react';
 import {useRecoilState} from 'recoil'
-import {todoListState }from './GlobalState/recoilState'
+import {todoListState }from './store/todoState'
 
 
 function edit(arr, index, newValue) {

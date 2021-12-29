@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
-import { RecoilRoot } from 'recoil';
 import Todo from './Todo';
+import User from "./user";
 
 
 function App() {
@@ -10,9 +10,9 @@ function App() {
 
   return (
     <div className="App">
-      <RecoilRoot>
         <Todo/>
-      </RecoilRoot>
+        {/*<User/> */}
+
     </div>
   );
 }
